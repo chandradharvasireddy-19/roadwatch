@@ -65,6 +65,7 @@ def detect(file):
         "time": datetime.now().isoformat()
     }
 
+
 # -------- HELPERS -------- #
 
 def get_severity(count, area):
