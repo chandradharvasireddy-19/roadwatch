@@ -1,5 +1,6 @@
 from ultralytics import YOLO
 import os
+from datetime import datetime
 
 model = YOLO("yolov8n.pt")
 
@@ -8,13 +9,13 @@ def detect(file):
 
     pothole_count = 0
     total_area = 0
+    total_conf = 0
     image_size = 0
 
     for r in results:
         if r.boxes is None:
             continue
 
-        # get image size safely
         if hasattr(r, "orig_shape"):
             image_size = r.orig_shape[0] * r.orig_shape[1]
 
@@ -30,12 +31,17 @@ def detect(file):
 
             x1, y1, x2, y2 = box.xyxy[0]
             area = float((x2 - x1) * (y2 - y1))
+
             pothole_count += 1
             total_area += area
+            total_conf += conf
+
+    # ✅ calculate after loop
+    avg_conf = total_conf / pothole_count if pothole_count else 0
 
     severity = get_severity(pothole_count, total_area)
 
-    # output image
+    # ✅ output image
     output_dir = "runs/detect/predict"
     image_output = None
 
@@ -43,7 +49,7 @@ def detect(file):
         files = os.listdir(output_dir)
         if files:
             latest_file = sorted(files)[-1]
-            image_output = f"/output/{latest_file}"
+            image_output = f"http://127.0.0.1:8000/output/{latest_file}"
 
     damage_ratio = float(total_area) / image_size if image_size else 0
 
@@ -54,9 +60,10 @@ def detect(file):
         "message": get_message(severity),
         "image_output": image_output,
         "color": "green" if severity == "low" else "yellow" if severity == "medium" else "red",
-        "damage_ratio": round(damage_ratio, 3)
+        "damage_ratio": round(damage_ratio, 3),
+        "confidence": round(avg_conf, 2),
+        "time": datetime.now().isoformat()
     }
-
 
 # -------- HELPERS -------- #
 
