@@ -8,10 +8,15 @@ def detect(file):
 
     pothole_count = 0
     total_area = 0
+    image_size = 0
 
     for r in results:
         if r.boxes is None:
             continue
+
+        # get image size safely
+        if hasattr(r, "orig_shape"):
+            image_size = r.orig_shape[0] * r.orig_shape[1]
 
         for box in r.boxes:
             conf = float(box.conf[0])
@@ -24,14 +29,13 @@ def detect(file):
                 continue
 
             x1, y1, x2, y2 = box.xyxy[0]
-            area = (x2 - x1) * (y2 - y1)
-
+            area = float((x2 - x1) * (y2 - y1))
             pothole_count += 1
             total_area += area
 
     severity = get_severity(pothole_count, total_area)
 
-    # ✅ Get latest output image
+    # output image
     output_dir = "runs/detect/predict"
     image_output = None
 
@@ -41,13 +45,16 @@ def detect(file):
             latest_file = sorted(files)[-1]
             image_output = f"/output/{latest_file}"
 
+    damage_ratio = float(total_area) / image_size if image_size else 0
+
     return {
         "potholes": pothole_count,
         "severity": severity,
         "risk_score": get_risk_score(pothole_count, total_area),
         "message": get_message(severity),
         "image_output": image_output,
-        "color": "green" if severity=="low" else "yellow" if severity=="medium" else "red"
+        "color": "green" if severity == "low" else "yellow" if severity == "medium" else "red",
+        "damage_ratio": round(damage_ratio, 3)
     }
 
 
@@ -63,11 +70,9 @@ def get_severity(count, area):
     else:
         return "high"
 
-
 def get_risk_score(count, area):
     score = count * 2 + (area / 50000)
     return min(int(score), 10)
-
 
 def get_message(severity):
     if severity == "high":
