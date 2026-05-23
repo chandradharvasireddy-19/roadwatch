@@ -43,7 +43,7 @@ async def detect_pothole(
 
     # 🔥 SAVE TO FIREBASE (NO CHANGE TO RESULT STRUCTURE)
     db.collection("reports").add({
-    "type": result["type"],
+    "type": result["types"],
     "severity": result["severity"],
     "risk_score": result["risk_score"],
     "status": "pending",   # ✅ ADD THIS HERE
