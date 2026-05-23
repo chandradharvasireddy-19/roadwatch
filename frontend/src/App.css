@@ -1,0 +1,425 @@
+ /* 🌌 Dark Theme Reset & Core Layout Styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0f172a; /* Smooth dark background slate */
+  color: #ffffff;
+  font-family: 'DM Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.home-wrapper {
+  position: relative;
+
+  min-height: 100vh;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #020617;
+}
+
+.home-background {
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-image:
+    linear-gradient(
+      rgba(2,6,23,0.82),
+      rgba(15,23,42,0.92)
+    ),
+    url("./assets/nightview.jpg");
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  opacity: 0.3;
+
+  z-index: 0;
+}
+.home-nav-buttons {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 18px;
+
+  margin-top: 40px;
+
+  flex-wrap: wrap;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.dark-neon-btn {
+
+  padding: 14px 28px;
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(59,130,246,0.22);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(2,6,23,0.92),
+      rgba(15,23,42,0.96),
+      rgba(30,41,59,0.95)
+    );
+
+  color: #dbeafe;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+
+  position: relative;
+
+  overflow: hidden;
+
+  transition: all 0.35s ease;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 10px rgba(37,99,235,0.12),
+    inset 0 0 10px rgba(59,130,246,0.03);
+}
+
+.dark-neon-btn::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: -50%;
+  left: -50%;
+
+  width: 200%;
+  height: 200%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59,130,246,0.18),
+      transparent 70%
+    );
+
+  transform: scale(0);
+
+  transition: 0.45s ease;
+}
+
+.dark-neon-btn:hover::before {
+
+  transform: scale(1);
+}
+
+.dark-neon-btn:hover {
+
+  transform:
+    translateY(-3px)
+    scale(1.03);
+
+  color: white;
+
+  border-color:
+    rgba(96,165,250,0.65);
+
+  box-shadow:
+    0 0 12px rgba(59,130,246,0.3),
+    0 0 35px rgba(37,99,235,0.18),
+    0 0 80px rgba(59,130,246,0.08);
+}
+
+.dark-neon-btn:active {
+
+  transform: scale(0.96);
+}
+.hero-section {
+
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  position: relative;
+
+  overflow: hidden;
+
+  color: white;
+
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      rgba(11, 30, 118, 0.19),
+      rgba(82, 7, 7, 0.536)
+    ),
+
+    url("./assets/furyview.png");
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+}
+.rain-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.rain-container::before {
+  content: "";
+
+  position: absolute;
+
+  width: 200%;
+  height: 200%;
+
+  background-image:
+    repeating-linear-gradient(
+      transparent 0px,
+      rgba(59,130,246,0.15) 2px,
+      transparent 4px
+    );
+
+  animation: rainMove 8s linear infinite;
+
+  transform: rotate(12deg);
+}
+
+@keyframes rainMove {
+
+  from {
+    transform:
+      translateY(-200px)
+      rotate(12deg);
+  }
+
+  to {
+    transform:
+      translateY(400px)
+      rotate(12deg);
+  }
+}
+
+.launch-btn {
+
+    font-size: 1.2rem;
+
+    color: white;
+
+    padding: 16px 34px;
+
+    margin-top: 20px;
+
+    border: 2px solid #3b82f6;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            45deg,
+            #0f172a,
+            #1e3a5f,
+            #2563eb
+        );
+
+    cursor: pointer;
+
+    transition: 0.35s ease-in-out;
+
+    position: relative;
+
+    overflow: hidden;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 0 10px rgba(59,130,246,0.25);
+}
+
+.launch-btn::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: -50%;
+
+    left: -50%;
+
+    width: 200%;
+
+    height: 200%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.25),
+            rgba(59,130,246,0) 70%
+        );
+
+    transform: scale(0);
+
+    transition: 0.45s;
+}
+
+.launch-btn:hover::before {
+
+    transform: scale(1);
+}
+
+.launch-btn:hover {
+
+    color: white;
+
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 15px #3b82f6,
+        0 0 50px rgba(59,130,246,0.9),
+        0 0 100px rgba(59,130,246,0.5);
+}
+
+.launch-btn:active {
+
+    transform: scale(0.96);
+}
+.nav-btn {
+
+    font-size: 0.95rem;
+
+    color: #cbd5e1;
+
+    padding: 10px 18px;
+
+    margin: 4px;
+
+    border: 1px solid rgba(59,130,246,0.25);
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            45deg,
+            #020617,
+            #0f172a,
+            #1e293b
+        );
+
+    cursor: pointer;
+
+    transition: 0.3s ease-in-out;
+
+    position: relative;
+
+    overflow: hidden;
+
+    backdrop-filter: blur(8px);
+}
+
+.nav-btn::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: -50%;
+
+    left: -50%;
+
+    width: 200%;
+
+    height: 200%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59,130,246,0.18),
+            transparent 70%
+        );
+
+    transform: scale(0);
+
+    transition: 0.4s;
+}
+
+.nav-btn:hover::before {
+
+    transform: scale(1);
+}
+
+.nav-btn:hover {
+
+    color: white;
+
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 10px rgba(59,130,246,0.35),
+        0 0 30px rgba(59,130,246,0.2);
+
+    transform:
+        translateY(-2px);
+}
+/* 🗺 CRITICAL Fix for Leaflet Maps */
+/* Without this, Leaflet collapses into a 0px invisible box */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #000000 !important; /* Matches your dark workspace */
+}
+
+/* Custom Scrollbar styling for that polished hackathon look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}

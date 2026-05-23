@@ -1,0 +1,86 @@
+.loader-screen {
+  height: 100vh;
+  background: linear-gradient(to bottom, #020617, #0f172a);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.loader-title {
+  color: white;
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  z-index: 2;
+  animation: pulseGlow 2s infinite;
+}
+
+.loader-subtitle {
+  color: #94a3b8;
+  margin-top: 12px;
+  font-size: 1.1rem;
+  z-index: 2;
+}
+
+.loader-bar {
+  width: 280px;
+  height: 8px;
+  background: #1e293b;
+  border-radius: 999px;
+  margin-top: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loader-progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #3b82f6, #60a5fa);
+  animation: loading 3s forwards;
+}
+
+.road-crack {
+  position: absolute;
+  width: 200%;
+  height: 2px;
+  background: rgba(239,68,68,0.6);
+  transform: rotate(-8deg);
+  animation: crackMove 2s infinite alternate;
+}
+
+@keyframes loading {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    text-shadow: 0 0 10px rgba(59,130,246,.4);
+  }
+
+  50% {
+    text-shadow: 0 0 30px rgba(59,130,246,.9);
+  }
+
+  100% {
+    text-shadow: 0 0 10px rgba(59,130,246,.4);
+  }
+}
+
+@keyframes crackMove {
+  from {
+    transform: rotate(-8deg) translateX(-40px);
+  }
+
+  to {
+    transform: rotate(-8deg) translateX(40px);
+  }
+}
